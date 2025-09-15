@@ -9,6 +9,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -36,7 +38,8 @@ public class TicketType {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    // TODO: Tickets
+    @OneToMany(mappedBy = "ticketType", cascade = CascadeType.ALL)
+    private List<Ticket> tickets = new ArrayList<>();
 
     @CreatedDate
     @Column(name = "created_at", updatable = false, nullable = false)
